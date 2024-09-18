@@ -1,39 +1,51 @@
-.pokemon-container {
-  text-align: center;
-}
-
 body {
-  font-family: 'Poppins', sans-serif; /* Choose a font you like */
-  background-color: #f0f0f0;
+  font-family: "Press Start 2P";
+  font-weight: 400;
+  background-color: #fefefe;
 }
 
-.container {
-  max-width: 600px;
-  height: 850px;
-  border-radius: 20px; /* Adjust the radius as needed */
-  background-color: #f5f5f5;
-  border-style: solid;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+p {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+}
+
+h2 {
+  padding-top: 20px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 600;
+}
+.poke-container {
+  max-width: 900px;
+  height: 1200px;
+  border-radius: 40px; 
+  background-color: #eceaea;
+  box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
   margin: 22px auto;
-  overflow-y: auto; /* Center the container horizontally */
+  overflow-y: auto; 
+  text-align: center;
 }
-
 
 #pokemon-select {
   font-size: 16px;
   padding: 10px;
 }
 
+#pokemon-sprite {
+  width: 150px;
+  height: 150px;
+}
+
 #catch-button {
   font-size: 18px;
   padding: 12px 20px;
+  width: 100%;
 }
 
 #result-message {
   font-size: 18px;
   font-weight: bold;
-  color: #008000; /* Green for success */
+  color: #008000;
 }
 
 #caught-pokemon-list {
@@ -49,13 +61,14 @@ body {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 h1 {
   padding-top: 30px;
   font-family: "Press Start 2P", cursive;
 }
 
 .custom-alert {
-  background-color: #ffdddd; /* Light pink for a warning */
+  background-color: #ffdddd; 
   color: #ff0000;
   border: 1px solid #ff0000;
   padding: 10px;
@@ -64,29 +77,29 @@ h1 {
 }
 
 #pokemon-list {
-  list-style: none; /* Remove default bullet points */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-  cursor: pointer; /* Change cursor to indicate selection on hover */
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  cursor: pointer; 
 }
 
 #pokemon-list li {
-  padding: 10px; /* Add padding for spacing */
-  border-bottom: 1px solid #ccc; /* Add a border to separate list items */
+  padding: 10px; 
+  border-bottom: 1px solid #ccc; 
 }
 
 #pokemon-list li:hover {
-  background-color: #eee; /* Change background color on hover */
+  background-color: #eee; 
 }
 
 #pokemon-list li.selected {
-  background-color: #99ff99; /* Highlight the selected item */
+  background-color: #99ff99; 
 }
 
 #result-message {
-  margin-top: 10px; /* Or use mb-3 for Bootstrap's margin utility */
+  margin-top: 10px; 
   font-weight: bold;
-  color: green; /* Change to text-success for Bootstrap's success color */
+  color: green; 
 }
 
 .shiny-animation {
@@ -95,7 +108,7 @@ h1 {
 
 @keyframes sparkle {
   0% {
-    color: #fce062; /* Adjust the color as desired */
+    color: #fce062; 
     text-shadow: 0 0 10px #f85408, 0 0 20px #f85408, 0 0 30px #f85408;
   }
   50% {
