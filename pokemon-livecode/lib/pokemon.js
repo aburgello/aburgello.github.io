@@ -7,6 +7,8 @@ const playerNameDisplay = document.getElementById('player-name');  
 const pokemonCaughtCount = document.getElementById('pokemon-caught-count');
 const caughtPokemonList = document.getElementById('caught-pokemon-list');
 const pokemonSprite = document.getElementById('pokemon-sprite');
+const shinyCountValue = document.getElementById('shiny-count-value');
+const shinyCaughtCount = document.getElementById('shiny-count-value');
 
 async function fetchPokemonDetails(pokemonName) {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
@@ -57,6 +59,10 @@ fetchPokemonData().then(() => {
         const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
         pokemonSprite.src = shinySpriteUrl;
         isShinyCaught = true;
+        let shinyCount = parseInt(localStorage.getItem('shinyCaughtCount')) || 0;
+        shinyCount++;
+        shinyCaughtCount.textContent = shinyCount;
+        localStorage.setItem('shinyCaughtCount', shinyCount);
       } else {
         resultMessage.textContent = `You caught ${selectedPokemon}.`;
         resultMessage.classList.remove('shiny-animation');
@@ -73,8 +79,7 @@ fetchPokemonData().then(() => {
       Swal.fire({
       title: 'Please select a Pokémon to catch.',
       icon: "warning",
-      iconHtml: "",
-      
+            
     });
       
     }
@@ -95,8 +100,12 @@ fetchPokemonData().then(() => {
 function updatePokemonCaughtCount() {
   let caughtCount = parseInt(localStorage.getItem('pokémonCaughtCount')) || 0;
   caughtCount++;
+  
   pokemonCaughtCount.textContent = caughtCount;
   localStorage.setItem('pokémonCaughtCount', caughtCount);
+
+  
+
 }
 
 function initializePlayerProfile() {
