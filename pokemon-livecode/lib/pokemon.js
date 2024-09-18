@@ -16,7 +16,7 @@ async function fetchPokemonDetails(pokemonName) {
 
 async function fetchPokemonData() {
   try {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1050');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
     const data = await response.json();
     const pokemon = data.results;
 
@@ -30,6 +30,7 @@ async function fetchPokemonData() {
         fetchPokemonDetails(pokemon.name).then(details => {
           option.dataset.spriteUrl = details.sprites.front_default;
           option.dataset.shinySpriteUrl = details.sprites.front_shiny;
+          
         });
       });
     } else {
@@ -42,13 +43,12 @@ async function fetchPokemonData() {
 
 let isShinyCaught = false;
 
-if (isShinyCaught === false) {
 
 fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 1365;
+      const isShiny = Math.random() < 1 / 10;
       if (isShiny) {
         resultMessage.textContent = `Congratulations! You caught a shiny ${selectedPokemon}!`;
         resultMessage.classList.add('shiny-animation');
@@ -66,20 +66,31 @@ fetchPokemonData().then(() => {
       }
 
       resultMessage.innerHTML = `
-        <img src="${pokemonSprite.src}" alt="${selectedPokemon} Sprite">
-        <div>${selectedPokemon}</div>
-      `;
-      if (isShinyCaught) {
-        alert('A shiny Pokémon has been caught! The game is over.');
-        catchButton.disabled = true;
-        return;
-      }
+        <img id="pokemon-sprite" src="${pokemonSprite.src}" alt="${selectedPokemon} Sprite">
+        <div>${selectedPokemon}</div>`;
+      
     } else {
-      alert('Please select a Pokémon to catch.');
+      Swal.fire({
+      title: 'Please select a Pokémon to catch.',
+      icon: "warning",
+      iconHtml: "",
+      
+    });
+      
+    }
+    
+    if (isShinyCaught) {
+      Swal.fire({
+        title: `Well done, you caught a shiny ${selectedPokemon}!`,
+        icon: "success"
+      });
+      catchButton.disabled = true;
     }
   });
 });
-}
+
+
+
 
 function updatePokemonCaughtCount() {
   let caughtCount = parseInt(localStorage.getItem('pokémonCaughtCount')) || 0;
