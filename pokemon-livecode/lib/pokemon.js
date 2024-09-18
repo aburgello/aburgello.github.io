@@ -48,7 +48,7 @@ fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 4000;
+      const isShiny = Math.random() < 1 / 1365;
       if (isShiny) {
         resultMessage.textContent = `Congratulations! You caught a shiny ${selectedPokemon}!`;
         resultMessage.classList.add('shiny-animation');
