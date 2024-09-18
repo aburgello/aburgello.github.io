@@ -6,6 +6,13 @@ const playerNameInput = document.getElementById('player-name-input');
 const playerNameDisplay = document.getElementById('player-name');   
 const pokemonCaughtCount = document.getElementById('pokemon-caught-count');
 const caughtPokemonList = document.getElementById('caught-pokemon-list');
+const pokemonSprite = document.getElementById('pokemon-sprite');
+
+async function fetchPokemonDetails(pokemonName) {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+  const data = await response.json();
+  return data;
+}
 
 async function fetchPokemonData() {
   try {
@@ -19,17 +26,19 @@ async function fetchPokemonData() {
         option.value = pokemon.name.toUpperCase();
         option.textContent = pokemon.name.toUpperCase();
         pokemonSelect.appendChild(option);
+
+        fetchPokemonDetails(pokemon.name).then(details => {
+          option.dataset.spriteUrl = details.sprites.front_default;
+          option.dataset.shinySpriteUrl = details.sprites.front_shiny;
+        });
       });
     } else {
-      console.error('pokémonSelect element not found');
+      console.error('pokemonSelect element not found');
     }
   } catch (error) {
     console.error('Error fetching Pokémon data:', error);
   }
 }
-
-alert('Please select a Pokémon to catch.', { class: 'custom-alert' });
-
 
 fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
@@ -41,16 +50,22 @@ fetchPokemonData().then(() => {
         resultMessage.classList.add('shiny-animation');
         updatePokemonCaughtCount();
         updatePokedex(`Shiny ${selectedPokemon}!`);
+        const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
+        pokemonSprite.src = shinySpriteUrl;
       } else {
         resultMessage.textContent = `You caught ${selectedPokemon}.`;
         resultMessage.classList.remove('shiny-animation');
         updatePokemonCaughtCount();
         updatePokedex(selectedPokemon);
-        
+        pokemonSprite.src = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.spriteUrl;
       }
-      }
-     else {
-      alert('Please select a Pokémon to catch.', { class: 'custom-alert' });
+
+      resultMessage.innerHTML = `
+        <img src="${pokemonSprite.src}" alt="${selectedPokemon} Sprite">
+        <div>${selectedPokemon}</div>
+      `;
+    } else {
+      alert('Please select a Pokémon to catch.');
     }
   });
 });
