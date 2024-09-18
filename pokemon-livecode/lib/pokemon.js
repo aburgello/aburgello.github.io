@@ -1,33 +1,44 @@
-const template = document.getElementById("cardTemplate");
-const infoTemplate = document.getElementById("infoTemplate");
-const container = document.getElementById("cardsContainer");
-const infoContainer = document.getElementById("infoContainer");
+const pokemonListContainer = document.getElementById('pokemon-list');
+const catchButton = document.getElementById('catch-button');
+const pokemonSelect = document.getElementById('pokemon-select');
+const resultMessage = document.getElementById('result-message');
 
-fetch("https://pokeapi.co/api/v2/pokemon")
-  .then((response) => response.json())
-  .then((data) => {
-    data.results.forEach((pokemon) => {
-      const name = pokemon.name;
-      fetch(pokemon.url)
-        .then((response) => response.json())
-        .then((data) => {
-          const image = data.sprites.front_default;
-          const types = data.types.map((type_element) => type_element.type.name).join(" - ");
-          const clone = template.content.cloneNode(true);
-          clone.querySelector("img").src = image;
-          clone.querySelector("h2").textContent = name;
-          clone.querySelector("p").textContent = types;
+async function fetchPokemonData() {
+  try {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
+    const data = await response.json();
+    const pokemon = data.results;
 
-          clone.querySelector("a").addEventListener("click", () => {
-            const cloneInfo = infoTemplate.content.cloneNode(true);
-            cloneInfo.querySelector("img").src = image;
-            cloneInfo.querySelector("h2").textContent = name;
-            cloneInfo.querySelector("p").textContent = types;
-            infoContainer.innerHTML = "";
-            infoContainer.appendChild(cloneInfo);
-          });
+    if (pokemonSelect) {
+      pokemon.forEach(pokemon => {
+        const option = document.createElement('option');
+        option.value = pokemon.name.toUpperCase();
+        option.textContent = pokemon.name.toUpperCase();
+        pokemonSelect.appendChild(option);
+      });
+    } else {
+      console.error('pokemonSelect element not found');
+    }
+  } catch (error) {
+    console.error('Error fetching Pokemon data:', error);
+  }
+}
 
-          container.appendChild(clone);
-        });
-    });
+fetchPokemonData().then(() => {
+  catchButton.addEventListener('click', () => {
+    const selectedPokemon = pokemonSelect.value;
+    if (selectedPokemon) {
+      const isShiny = Math.random() < 1 / 4096;
+      if (isShiny) {
+        resultMessage.textContent = `Congratulations! You caught a shiny ${selectedPokemon}!`;
+        resultMessage.classList.add('shiny-animation');
+      } else {
+        resultMessage.textContent = `You caught ${selectedPokemon}.`;
+        resultMessage.classList.remove('shiny-animation');
+      }
+      }
+     else {
+      alert('Please select a Pokemon to catch.');
+    }
   });
+});

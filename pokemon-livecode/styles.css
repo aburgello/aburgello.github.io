@@ -1,0 +1,51 @@
+.pokemon-container {
+  text-align: center;
+}
+
+h1 {
+  padding-top: 30px;
+  font-family: "Press Start 2P", cursive;
+}
+
+#pokemon-list {
+  list-style: none; /* Remove default bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  cursor: pointer; /* Change cursor to indicate selection on hover */
+}
+
+#pokemon-list li {
+  padding: 10px; /* Add padding for spacing */
+  border-bottom: 1px solid #ccc; /* Add a border to separate list items */
+}
+
+#pokemon-list li:hover {
+  background-color: #eee; /* Change background color on hover */
+}
+
+#pokemon-list li.selected {
+  background-color: #99ff99; /* Highlight the selected item */
+}
+
+#result-message {
+  margin-top: 10px; /* Or use mb-3 for Bootstrap's margin utility */
+  font-weight: bold;
+  color: green; /* Change to text-success for Bootstrap's success color */
+}
+
+.shiny-animation {
+  animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+  0% {
+    color: #ff00ff; /* Adjust the color as desired */
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+  }
+  50% {
+    color: #ffffff;
+  }
+  100% {
+    color: #ff00ff;
+  }
+}
