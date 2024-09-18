@@ -2,9 +2,56 @@
   text-align: center;
 }
 
+body {
+  font-family: 'Poppins', sans-serif; /* Choose a font you like */
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 800px;
+}
+
+#pokemon-select {
+  font-size: 16px;
+  padding: 10px;
+}
+
+#catch-button {
+  font-size: 18px;
+  padding: 12px 20px;
+}
+
+#result-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: #008000; /* Green for success */
+}
+
+#caught-pokemon-list {
+  list-style: none;
+  padding: 0;
+}
+
+#caught-pokemon-list li {
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 h1 {
   padding-top: 30px;
   font-family: "Press Start 2P", cursive;
+}
+
+.custom-alert {
+  background-color: #ffdddd; /* Light pink for a warning */
+  color: #ff0000;
+  border: 1px solid #ff0000;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
 }
 
 #pokemon-list {
@@ -39,13 +86,14 @@ h1 {
 
 @keyframes sparkle {
   0% {
-    color: #ff00ff; /* Adjust the color as desired */
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+    color: #fce062; /* Adjust the color as desired */
+    text-shadow: 0 0 10px #f85408, 0 0 20px #f85408, 0 0 30px #f85408;
   }
   50% {
     color: #ffffff;
   }
   100% {
-    color: #ff00ff;
+    color: #f85408;
   }
 }
+
