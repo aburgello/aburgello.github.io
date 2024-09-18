@@ -16,7 +16,7 @@ async function fetchPokemonDetails(pokemonName) {
 
 async function fetchPokemonData() {
   try {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1050');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
     const data = await response.json();
     const pokemon = data.results;
 
@@ -40,11 +40,15 @@ async function fetchPokemonData() {
   }
 }
 
+let isShinyCaught = false;
+
+if (isShinyCaught === false) {
+
 fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 4000;
+      const isShiny = Math.random() < 1 / 10;
       if (isShiny) {
         resultMessage.textContent = `Congratulations! You caught a shiny ${selectedPokemon}!`;
         resultMessage.classList.add('shiny-animation');
@@ -52,6 +56,7 @@ fetchPokemonData().then(() => {
         updatePokedex(`Shiny ${selectedPokemon}!`);
         const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
         pokemonSprite.src = shinySpriteUrl;
+        isShinyCaught = true;
       } else {
         resultMessage.textContent = `You caught ${selectedPokemon}.`;
         resultMessage.classList.remove('shiny-animation');
@@ -64,11 +69,17 @@ fetchPokemonData().then(() => {
         <img src="${pokemonSprite.src}" alt="${selectedPokemon} Sprite">
         <div>${selectedPokemon}</div>
       `;
+      if (isShinyCaught) {
+        alert('A shiny Pokémon has been caught! The game is over.');
+        catchButton.disabled = true;
+        return;
+      }
     } else {
       alert('Please select a Pokémon to catch.');
     }
   });
 });
+}
 
 function updatePokemonCaughtCount() {
   let caughtCount = parseInt(localStorage.getItem('pokémonCaughtCount')) || 0;
