@@ -35,6 +35,10 @@ h2 {
   overflow-y: auto;
 }
 
+.select2  {
+  margin-bottom: 10px;
+}
+
 #pokedex {
   margin: 15px;
 }
