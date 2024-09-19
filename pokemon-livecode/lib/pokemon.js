@@ -50,7 +50,7 @@ fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 11;
+      const isShiny = Math.random() < 1 / 2;
       if (isShiny) {
         const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
         pokemonSprite.src = shinySpriteUrl;
@@ -87,8 +87,19 @@ fetchPokemonData().then(() => {
     if (isShinyCaught) {
       Swal.fire({
         title: `Well done, you caught a shiny ${selectedPokemon}!`,
-        icon: "success"
-      });
+        icon: "success",
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3500,
+        didOpen: () => {
+          const timer = Swal.getPopup().querySelector("b");
+          timerInterval = setInterval(() => {
+            timer.textContent = `${Swal.getTimerLeft()}`;
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        }});
       catchButton.disabled = true;
     }
   });
