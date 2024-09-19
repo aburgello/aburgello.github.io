@@ -50,15 +50,15 @@ fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 1500;
+      const isShiny = Math.random() < 1 / 2;
       if (isShiny) {
-        resultMessage.textContent = `Congratulations! You caught a shiny ${selectedPokemon}!`;
-        resultMessage.classList.add('shiny-animation');
-        updatePokemonCaughtCount();
-        updatePokedex(`Shiny ${selectedPokemon}!`);
         const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
         pokemonSprite.src = shinySpriteUrl;
+        resultMessage.textContent = `Congratulations! You caught a shiny ${selectedPokemon}!`;
+        resultMessage.classList.add('shiny-animation');
         isShinyCaught = true;
+        updatePokemonCaughtCount();
+        updatePokedex(selectedPokemon);
         let shinyCount = parseInt(localStorage.getItem('shinyCaughtCount')) || 0;
         shinyCount++;
         shinyCaughtCount.textContent = shinyCount;
@@ -124,12 +124,31 @@ function initializePlayerProfile() {
 
 initializePlayerProfile();
 
+
 function updatePokedex(pokemonName) {
   const caughtPokemon = JSON.parse(localStorage.getItem('caughtPokémon')) || [];
   caughtPokemon.push(pokemonName);
   localStorage.setItem('caughtPokémon', JSON.stringify(caughtPokemon));
 
-  const li = document.createElement('li');
-  li.textContent = pokemonName;
-  caughtPokemonList.appendChild(li);
+  const caughtPokemonList = document.getElementById('caught-pokemon-list');
+
+  const pokemonBoxTemplate = document.getElementById('pokemon-box-template');
+  const pokemonBox = pokemonBoxTemplate.content.cloneNode(true);
+  
+  if (isShinyCaught) {
+    pokemonBox.querySelector('img').src = pokemonSelect.querySelector(`option[value="${pokemonName}"]`).dataset.shinySpriteUrl;
+    pokemonBox.querySelector('p').textContent = `Shiny ${pokemonName}`;
+  } else {
+    pokemonBox.querySelector('img').src = pokemonSelect.querySelector(`option[value="${pokemonName}"]`).dataset.spriteUrl;
+    pokemonBox.querySelector('p').textContent = pokemonName;
+  }
+
+
+  // Calculate the current column index based on the total number of boxes
+  const columnCount = caughtPokemonList.children.length; // Get the number of columns
+  const currentColumnIndex = (caughtPokemon.length - 1) % columnCount; // Calculate the current column index
+
+  const targetColumn = caughtPokemonList.children[currentColumnIndex];
+  targetColumn.appendChild(pokemonBox);
 }
+
