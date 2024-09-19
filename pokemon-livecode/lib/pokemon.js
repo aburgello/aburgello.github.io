@@ -21,12 +21,13 @@ async function fetchPokemonData() {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1650');
     const data = await response.json();
     const pokemon = data.results;
-
+    
     if (pokemonSelect) {
       pokemon.forEach(pokemon => {
         const option = document.createElement('option');
         option.value = pokemon.name.toUpperCase();
         option.textContent = pokemon.name.toUpperCase();
+        
         pokemonSelect.appendChild(option);
 
         fetchPokemonDetails(pokemon.name).then(details => {
@@ -34,6 +35,7 @@ async function fetchPokemonData() {
           option.dataset.shinySpriteUrl = details.sprites.front_shiny;
           
         });
+        
       });
     } else {
       console.error('pokemonSelect element not found');
@@ -41,6 +43,7 @@ async function fetchPokemonData() {
   } catch (error) {
     console.error('Error fetching Pokémon data:', error);
   }
+  $('#pokemon-select').select2();
 }
 
 let isShinyCaught = false;
