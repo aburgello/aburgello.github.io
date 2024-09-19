@@ -143,10 +143,7 @@ function updatePokedex(pokemonName) {
     pokemonBox.querySelector('p').textContent = pokemonName;
   }
 
+  const columnCount = 4; 
+  const currentColumnIndex = (caughtPokemon.length - 1) % columnCount; 
 
-  const columnCount = caughtPokemonList.children.length;
-  const targetColumn = caughtPokemonList.children.find(column => column.children.length < columnCount);
-  if (targetColumn) {
-    targetColumn.appendChild(pokemonBox);
-  }
 }
