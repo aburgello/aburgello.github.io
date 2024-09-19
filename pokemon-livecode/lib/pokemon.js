@@ -50,7 +50,7 @@ fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 2;
+      const isShiny = Math.random() < 1 / 850;
       if (isShiny) {
         const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
         pokemonSprite.src = shinySpriteUrl;
@@ -100,7 +100,6 @@ fetchPokemonData().then(() => {
         willClose: () => {
           clearInterval(timerInterval);
         }});
-      catchButton.disabled = true;
     }
   });
 });
