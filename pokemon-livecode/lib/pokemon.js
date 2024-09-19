@@ -100,6 +100,7 @@ fetchPokemonData().then(() => {
         willClose: () => {
           clearInterval(timerInterval);
         }});
+      let isShinyCaught = false;
     }
   });
 });
