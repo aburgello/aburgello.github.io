@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <title>Pokemon Catcher</title>
 </head>
-<body style="background-image: url('path/to/your/background.jpg'); background-size: cover; background-position: center;">
+<body background-size: cover; background-position: center;>
   <div class="poke-container">
     <h1 class="text-center mb-4">Pokémon Catcher</h1>
     <div class="row justify-content-center">
@@ -32,15 +32,37 @@
             <p>Pokémon Caught: <span id="pokemon-caught-count">0</span></p>
             <p id="shiny-count">Shiny Pokémon Caught: <span id="shiny-count-value"></span></p>
           </div>
+        </div>
+      </div>
+
           <div id="pokedex">
             <h2>Pokedex <i class="fas fa-book-open"></i></h2>
-            <ul id="caught-pokemon-list" class="list-group">
-            </ul>
+            <div class="row justify-content-center" id="caught-pokemon-list">
+              <div class="col-md-3">
+                <div id="caught-pokemon-list-1" class="list-group d-flex flex-wrap"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="caught-pokemon-list-2" class="list-group d-flex flex-wrap"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="caught-pokemon-list-3" class="list-group d-flex flex-wrap"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="caught-pokemon-list-4" class="list-group d-flex flex-wrap"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+
+  <template id="pokemon-box-template">
+    <div class="pokemon-box">
+      <img src="" alt="Pokémon Sprite" class="mb-2">
+      <p class="text-center mb-0">Pokémon Name</p>
     </div>
-  </div>
+  </template>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="lib/pokemon.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
