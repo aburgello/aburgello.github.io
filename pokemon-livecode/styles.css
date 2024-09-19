@@ -14,21 +14,32 @@ h2 {
   font-family: "Press Start 2P", system-ui;
   font-weight: 600;
 }
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .poke-container {
   max-width: 900px;
-  height: 100%;
-  max-height: 1080px;
+  width: 800px;
+  height: 800px;
   border-radius: 40px; 
   border-style: solid;
   background-color: #eceaea;
   box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  margin: 22px auto;
-  overflow-y: auto; 
-  text-align: center;
+  margin: 25px;
+  overflow-y: auto;
 }
 
+#pokedex {
+  margin: 15px;
+}
 #pokemon-select {
+  font-family: "Roboto", system-ui;
   font-size: 16px;
   padding: 10px;
 }
@@ -39,6 +50,7 @@ h2 {
 }
 
 #catch-button {
+  font-family: "Roboto";
   font-size: 18px;
   padding: 12px 20px;
   width: 100%;
@@ -48,6 +60,7 @@ h2 {
   font-size: 18px;
   font-weight: bold;
   color: #008000;
+  margin-bottom: 40px;
 }
 
 #caught-pokemon-list {
@@ -126,11 +139,14 @@ h1 {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;
+  padding-bottom: 10px;
 }
 
 .pokemon-box img {
   max-width: 80px;
   max-height: 80px;
+  margin-bottom: -10px;
+  padding-top: 10px;
 }
 #caught-pokemon-list {
   display: flex;
@@ -139,7 +155,7 @@ h1 {
 }
 
 .col-md-4 {
-  width: 25%;
+  width: 22%;
 }
 .row {
   display: flex; /* Ensure flexbox layout */
