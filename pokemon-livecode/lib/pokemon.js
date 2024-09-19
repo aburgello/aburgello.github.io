@@ -50,7 +50,7 @@ fetchPokemonData().then(() => {
   catchButton.addEventListener('click', () => {
     const selectedPokemon = pokemonSelect.value;
     if (selectedPokemon) {
-      const isShiny = Math.random() < 1 / 800;
+      const isShiny = Math.random() < 1 / 11;
       if (isShiny) {
         const shinySpriteUrl = pokemonSelect.querySelector(`option[value="${selectedPokemon}"]`).dataset.shinySpriteUrl;
         pokemonSprite.src = shinySpriteUrl;
