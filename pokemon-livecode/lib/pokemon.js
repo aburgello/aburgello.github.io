@@ -145,9 +145,9 @@ function updatePokedex(pokemonName) {
 
 
   // Calculate the current column index based on the total number of boxes
-  const columnCount = caughtPokemonList.children.length; // Get the number of columns
-  const currentColumnIndex = (caughtPokemon.length - 1) % columnCount; // Calculate the current column index
-
+  const columnCount = 4; // Get the number of columns
+  const currentColumnIndex = 0; // Calculate the current column index
+  currentColumnIndex++;
   const targetColumn = caughtPokemonList.children[currentColumnIndex];
   targetColumn.appendChild(pokemonBox);
 }
