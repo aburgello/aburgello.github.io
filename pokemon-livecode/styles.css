@@ -36,6 +36,8 @@ h2 {
 }
 
 .select2  {
+  font-family: "Press Start 2P", system-ui;
+  font-size: 12px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
