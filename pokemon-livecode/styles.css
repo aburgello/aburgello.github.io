@@ -162,9 +162,9 @@ h1 {
   width: 22%;
 }
 .row {
-  display: flex; /* Ensure flexbox layout */
-  justify-content: center; /* Center columns horizontally */
-  flex-wrap: wrap; /* Allow boxes to wrap to the next row */ /* Adjust spacing between columns */
+  display: flex; 
+  justify-content: center; 
+  flex-wrap: wrap; 
 }
 
 .shiny-animation {
